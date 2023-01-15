@@ -12,6 +12,12 @@ const extremeBtn = document.querySelector('#extremeBtn')
 
 const modalEl = document.querySelector('#modalEl')
 const modalSc = document.querySelector('#modalSc')
+
+let multiplier = 1
+let refresh = 1000
+
+const background = new Image()
+background.src='./assets/img/pixelSpace.jpg'
 class Player {
     constructor(x, y, radius, color) {
         this.x = x
@@ -75,8 +81,8 @@ class Enemy {
     }
     update() {
         this.draw()
-        this.x = (this.x + this.velocity.x * (Math.random() * 2 + 1))
-        this.y = (this.y + this.velocity.y * (Math.random() * 2 + 1))
+        this.x = (this.x + this.velocity.x * multiplier)
+        this.y = (this.y + this.velocity.y * multiplier)
     }
 
 }
@@ -101,8 +107,9 @@ function spawnEnemies(refresh) {
     //hacer math . random * todos los tipos de enemigo que hayan, y hacer un if
     //que, segun el tipo de enemigo que toque se le asignen unas propiedades u otras
     //al objeto
+    stopPlaying();
     setInterval(() => {
-        const radius = 30;
+        const radius = Math.random() * 30 + 15;
         let x
         let y
         if (Math.random() < 0.5) {
@@ -128,6 +135,16 @@ function spawnEnemies(refresh) {
     },
        refresh)
 }
+
+function stopPlaying() {
+    // Get a reference to the last interval + 1
+    const interval_id = window.setInterval(function () { }, Number.MAX_SAFE_INTEGER);
+    // Clear any timeout/interval up to that id
+    for (let i = 1; i < interval_id; i++) {
+        window.clearInterval(i);
+    }
+}
+
 let animationID
 let score = 0
 function animate() {
@@ -136,9 +153,10 @@ function animate() {
     //"animationID" makes reference to THIS actual frame
     animationID = requestAnimationFrame(animate)
 
-
-    ctx.fillStyle = 'rgba(0,0,0,0.1)'
+   ctx.drawImage(background,0,0,canvas.width,canvas.height)
+    ctx.fillStyle = 'rgba(255,255,255,0.1)'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
+    
     player.draw();
     projectiles.forEach((projectile, index) => {
         projectile.update()
@@ -200,26 +218,34 @@ addEventListener('click', (e) => {
             5, 'red', velocity))
 })
 easyBtn.addEventListener('click', () => {
+    refresh=1000
+    multiplier = 2
     init()
     animate()
-    spawnEnemies(1000)
+    spawnEnemies(refresh)
     modalEl.style.display = 'none'
 })
 mediumBtn.addEventListener('click', () => {
+    refresh=800
+    multiplier=3;
     init()
     animate()
-    spawnEnemies(800)
+    spawnEnemies(refresh)
     modalEl.style.display = 'none'
 })
 hardBtn.addEventListener('click', () => {
+    refresh=500
+    multiplier=6;
     init()
     animate()
-    spawnEnemies(500)
+    spawnEnemies(refresh)
     modalEl.style.display = 'none'
 })
 extremeBtn.addEventListener('click', () => {
+    refresh=550
+    multiplier=9;
     init()
     animate()
-    spawnEnemies(400)
+    spawnEnemies(refresh)
     modalEl.style.display = 'none'
 })
