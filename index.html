@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas G</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <style>
+        body {
+            margin: 0
+        }
+    </style>
+    <div class="fixed text-white text-xl ml-2 mt-2 select-none">
+        <span>Score: </span><span id="score">0</span>
+    </div>
+    <canvas style="background: url('../SpaceInvacerObj/assets/img/bg.jpeg');"></canvas>
+
+    <div id="modalEl" class="fixed inset-0 flex items-center justify-center text-center">
+        <div class="bg-white max-w-xl w-full p-6">
+            <h1 id="modalSc" class="text-5xl font-bold leading-none">0</h1>
+            <h3 class="text-sm text-grat-700 mb-4">Points</h3>
+            <h2 id="modalSc" class="text-4xl  mb-4">Difficulty</h2>
+            <div><button id="easyBtn" class="bg-green-500 text-white w-full py-2 rounded-full mb-3">Easy</button></div>
+            <div><button id="mediumBtn" class="bg-yellow-500 text-white w-full py-2 rounded-full mb-3">Medium</button></div>
+            <div><button id="hardBtn" class="bg-red-500 text-white w-full py-2 rounded-full mb-3">Hard</button></div>
+            <div><button id="extremeBtn" class="bg-violet-500 text-white w-full py-2 rounded-full mb-3">Extreme</button></div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>
